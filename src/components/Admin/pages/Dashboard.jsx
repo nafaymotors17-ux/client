@@ -8,7 +8,6 @@ import {
   RefreshCw,
   Clock,
   CalendarX,
-  TrendingUp,
   User,
   Edit,
   Trash2,
@@ -22,49 +21,42 @@ const Dashboard = () => {
     {
       label: "Purchased",
       value: "0",
-      change: "+0%",
       icon: ShoppingCart,
       color: "blue",
     },
     {
       label: "Loaded",
       value: "0",
-      change: "+0%",
       icon: Package,
       color: "green",
     },
     {
       label: "Available",
       value: "0",
-      change: "+0%",
       icon: CheckCircle,
       color: "emerald",
     },
     {
       label: "Sold",
       value: "0",
-      change: "+0%",
       icon: DollarSign,
       color: "yellow",
     },
     {
       label: "Released",
       value: "0",
-      change: "+0%",
       icon: RefreshCw,
       color: "purple",
     },
     {
       label: "Expiring Soon",
       value: "0",
-      change: "+0%",
       icon: Clock,
       color: "orange",
     },
     {
       label: "Expired",
       value: "0",
-      change: "+0%",
       icon: CalendarX,
       color: "red",
     },
@@ -120,8 +112,69 @@ const Dashboard = () => {
   };
 
   const loadStats = async () => {
-    // You can implement this to fetch real stats from your API
-    // For now, we'll keep the placeholder stats
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/dashboard/stats`
+      );
+      const data = await response.json();
+      console.log(data);
+
+      if (data.success) {
+        const statsData = data.data;
+
+        // Format numbers with commas
+        const formatNumber = (num) => {
+          return num?.toLocaleString() || "0";
+        };
+
+        setStats([
+          {
+            label: "Purchased",
+            value: formatNumber(statsData.purchased),
+            icon: ShoppingCart,
+            color: "blue",
+          },
+          {
+            label: "Loaded",
+            value: formatNumber(statsData.loaded),
+            icon: Package,
+            color: "green",
+          },
+          {
+            label: "Available",
+            value: formatNumber(statsData.available),
+            icon: CheckCircle,
+            color: "emerald",
+          },
+          {
+            label: "Sold",
+            value: formatNumber(statsData.sold),
+            icon: DollarSign,
+            color: "yellow",
+          },
+          {
+            label: "Released",
+            value: formatNumber(statsData.released),
+            icon: RefreshCw,
+            color: "purple",
+          },
+          {
+            label: "Expiring Soon",
+            value: formatNumber(statsData.expiring_soon),
+            icon: Clock,
+            color: "orange",
+          },
+          {
+            label: "Expired",
+            value: formatNumber(statsData.expired),
+            icon: CalendarX,
+            color: "red",
+          },
+        ]);
+      }
+    } catch (error) {
+      console.error("Error loading dashboard stats:", error);
+    }
   };
 
   const formatActivityMessage = (activity) => {
@@ -195,7 +248,6 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((stat, index) => {
           const Icon = stat.icon;
-          const isPositive = !stat.change.startsWith("-");
 
           return (
             <div
@@ -210,16 +262,6 @@ const Dashboard = () => {
                   <p className="text-2xl font-bold text-gray-900 mt-1">
                     {stat.value}
                   </p>
-                  <div
-                    className={`flex items-center mt-1 text-sm ${
-                      isPositive ? "text-green-600" : "text-red-600"
-                    }`}
-                  >
-                    <TrendingUp
-                      className={`w-4 h-4 mr-1 ${!isPositive && "rotate-180"}`}
-                    />
-                    {stat.change}
-                  </div>
                 </div>
                 <div
                   className={`p-3 rounded-full ${getColorClasses(stat.color)}`}
