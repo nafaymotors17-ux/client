@@ -218,7 +218,7 @@ const Purchased = () => {
           loading={loading}
           onEdit={handleEdit}
           onDelete={handleDelete}
-          onMarkAsLoadRequested={handleMarkAsLoadRequested} // ✅ NEW action
+          markAsLoadRequested={handleMarkAsLoadRequested} // ✅ NEW action
           currentTab="purchased"
           fields={purchasedFields}
         />

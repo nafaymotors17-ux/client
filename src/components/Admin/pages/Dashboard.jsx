@@ -65,36 +65,36 @@ const Dashboard = () => {
   ];
 
   const recentActivities = [
-    {
-      id: 1,
-      action: "New purchase order #00123",
-      time: "2 hours ago",
-      type: "purchase",
-    },
-    {
-      id: 2,
-      action: "Item #456 marked as sold",
-      time: "4 hours ago",
-      type: "sold",
-    },
-    {
-      id: 3,
-      action: "New items loaded to inventory",
-      time: "6 hours ago",
-      type: "loaded",
-    },
-    {
-      id: 4,
-      action: "Items released from hold",
-      time: "1 day ago",
-      type: "released",
-    },
-    {
-      id: 5,
-      action: "5 items expiring in 3 days",
-      time: "1 day ago",
-      type: "expiring",
-    },
+    // {
+    //   id: 1,
+    //   action: "New purchase order #00123",
+    //   time: "2 hours ago",
+    //   type: "purchase",
+    // },
+    // {
+    //   id: 2,
+    //   action: "Item #456 marked as sold",
+    //   time: "4 hours ago",
+    //   type: "sold",
+    // },
+    // {
+    //   id: 3,
+    //   action: "New items loaded to inventory",
+    //   time: "6 hours ago",
+    //   type: "loaded",
+    // },
+    // {
+    //   id: 4,
+    //   action: "Items released from hold",
+    //   time: "1 day ago",
+    //   type: "released",
+    // },
+    // {
+    //   id: 5,
+    //   action: "5 items expiring in 3 days",
+    //   time: "1 day ago",
+    //   type: "expiring",
+    // },
   ];
 
   const getColorClasses = (color, isText = false) => {
