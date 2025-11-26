@@ -40,7 +40,7 @@ const PurchaseTable = ({
     { key: "expiryDate", label: "Expiry Date", type: "month" },
     { key: "remainingDays", label: "Remaining Days", type: "remainingDays" },
     { key: "ETA", label: "ETA", type: "date" },
-    { key: "createdAt", label: "Created Ay", type: "datetime" },
+    { key: "createdAt", label: "Created At", type: "datetime" },
   ],
 }) => {
   const formatCurrency = (amount) => {
@@ -137,7 +137,7 @@ const PurchaseTable = ({
       case "status":
         return (
           <span
-            className={`inline-flex px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(
+            className={`inline-flex px-1 py-1 rounded-full text-xs font-medium ${getStatusColor(
               value
             )}`}
           >
@@ -161,18 +161,27 @@ const PurchaseTable = ({
             </span>
           </div>
         );
-      case "datetime": // ✅ NEW: Handle datetime type
+      case "datetime":
+        if (!value) return "-";
+        const d = new Date(value);
         return (
-          <div className="flex flex-col">
-            <span className="text-sm">{formatDateTime(value)}</span>
+          <div className="flex flex-col leading-tight">
+            <span className="text-sm">
+              {d.toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
+            </span>
             <span className="text-xs text-gray-500">
-              {new Date(value).toLocaleTimeString("en-US", {
+              {d.toLocaleTimeString("en-US", {
                 hour: "2-digit",
                 minute: "2-digit",
               })}
             </span>
           </div>
         );
+
       default:
         return value || "-";
     }
@@ -337,13 +346,13 @@ const PurchaseTable = ({
 
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full divide-y divide-gray-200">
+      <table className="min-w-full divide-y divide-gray-400">
         <thead className="bg-gray-50">
           <tr>
             {fields.map((field) => (
               <th
                 key={field.key}
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                className="px-2 py-1 text-left text-xs font-medium text-gray-900 uppercase"
               >
                 {field.label}
               </th>
@@ -359,12 +368,12 @@ const PurchaseTable = ({
               {fields.map((field) => (
                 <td
                   key={field.key}
-                  className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                  className="px-3 py-1 whitespace-nowrap text-sm text-gray-900"
                 >
                   {renderCellContent(purchase, field)}
                 </td>
               ))}
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+              <td className="px-6 py-2 whitespace-nowrap text-sm font-medium">
                 <div className="flex items-center gap-2">
                   {renderActions(purchase)}
                 </div>

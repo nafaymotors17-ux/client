@@ -187,7 +187,7 @@ const AllRecords = () => {
     { key: "modelYear", label: "Model Year", type: "month" },
     { key: "expiryDate", label: "Expiry Date", type: "month" },
     { key: "remainingDays", label: "Remaining Days", type: "remainingDays" },
-    { key: "createdAt", label: "Created Ay", type: "datetime" },
+    { key: "createdAt", label: "Created At", type: "datetime" },
   ];
 
   return (
