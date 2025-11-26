@@ -23,6 +23,7 @@ export const purchaseService = {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(purchaseData),
       }
     );
@@ -60,6 +61,7 @@ export const purchaseService = {
       {
         method: "GET",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
       }
     );
 
@@ -75,6 +77,7 @@ export const purchaseService = {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(purchaseData),
       }
     );
@@ -90,6 +93,7 @@ export const purchaseService = {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
       }
     );
     return handleResponse(response);
@@ -104,6 +108,7 @@ export const purchaseService = {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(statusData),
       }
     );
@@ -119,6 +124,7 @@ export const purchaseService = {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
       }
     );
     return handleResponse(response);
